@@ -175,6 +175,27 @@
       flex-wrap: wrap;
     }
 
+    .channels {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.channels img {
+  width: 260px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.channels img:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 30px rgba(255, 211, 77, 0.4);
+}
+
     section {
       padding: 80px 0;
     }
@@ -622,6 +643,12 @@
           <a class="ghost-btn" href="#work">Explore My Work</a>
           <a class="cta-btn" href="#contact">Let’s Work Together</a>
         </div>
+        
+        <div class="channels">
+  <img src="Fabri_rblx_Sub.png">
+  <img src="Fabri_yt_Sub.png">
+  <img src="Fabri_mc_Sub.png">
+</div>
       </div>
     </section>
 
