@@ -641,8 +641,8 @@ body {
 
     .reveal {
   opacity: 0;
-  transform: translateY(42px);
-  -webkit-transform: translateY(42px);
+  transform: translate3d(0, 42px, 0);
+  -webkit-transform: translate3d(0, 42px, 0);
   transition: opacity 0.8s ease, transform 0.8s ease, -webkit-transform 0.8s ease;
   will-change: opacity, transform;
   -webkit-backface-visibility: hidden;
@@ -651,8 +651,13 @@ body {
 
 .reveal.show {
   opacity: 1;
-  transform: translateY(0);
-  -webkit-transform: translateY(0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+    @supports (-webkit-touch-callout: none) {
+  .reveal {
+    will-change: auto;
+  }
 }
  @media (prefers-reduced-motion: reduce) {
   .reveal {
@@ -841,16 +846,17 @@ body {
 
   <main>
     <section class="hero" id="home">
-      <div class="container hero-inner reveal">
+      <div class="container hero-inner">
         <h1 class="reveal">
   I turn your ideas into
   <span class="accent-line">high-impact videos</span>
 </h1>
 
 <p class="reveal">
-  Video editor with a +4 years of experience,I focus on creating clean,dynamic,scroll-stopping content for creators,brands,
-  and channels.I adapt to your style and make sure every video feels polished,engaging and built
-  to keep attention.
+Video editor with 4+ years of experience. I focus on creating clean, dynamic, scroll-stopping content for creators, brands,
+and channels. I adapt to your style and make sure every video feels polished, engaging, and 
+built to keep attention.
+
 </p>
 
 <div class="hero-actions reveal">
@@ -892,9 +898,9 @@ body {
           <h2>Long-form videos</h2>
           <div class="line"></div>
           <p>
-            I edit YouTube videos and horizontal content with a <span class="accent-text">strong rhythm</span>,
-            sharp pacing, and visuals designed to hold attention. I can also turn streams or raw recordings into
-            polished long-form content with the <span class="accent-text">best moments highlighted</span>.
+            I edit YouTube videos and horizontal content with <span class="accent-text">strong rhythm</span>,
+            sharp pacing, and visuals designed to hold attention. I can also turn streams or raw recordings 
+            into polished long-form content with <span class="accent-text">best moments highlighted</span>.
           </p>
         </div>
 
@@ -961,8 +967,8 @@ body {
           <div class="line"></div>
           <p>
             I create vertical content for TikTok, Instagram Reels, and YouTube Shorts with <span class="accent-text">fast hooks</span>,
-            subtitles, dynamic motion, and edits built to stop the scroll. These are ideal for viral-style clips,
-            talking head videos, gaming edits, and social media growth content.
+            subtitles, dynamic motion, and edits built to stop the scroll. These are ideal for viral-style clips, 
+            talking-head videos, gaming edits, and social media growth content.
           </p>
         </div>
 
@@ -1181,14 +1187,33 @@ body {
 const showVisibleReveals = () => {
   revealElements.forEach((el) => {
     const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.92) {
+    if (rect.top < window.innerHeight * 0.96) {
       el.classList.add('show');
     }
   });
 };
 
-if (!('IntersectionObserver' in window)) {
+const showAllReveals = () => {
   revealElements.forEach((el) => el.classList.add('show'));
+};
+
+const isAppleDevice = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (prefersReducedMotion) {
+  showAllReveals();
+} else if (!('IntersectionObserver' in window) || isAppleDevice || isTouchDevice) {
+  window.addEventListener('load', () => {
+    requestAnimationFrame(() => {
+      showVisibleReveals();
+      setTimeout(showVisibleReveals, 120);
+      setTimeout(showVisibleReveals, 400);
+    });
+  });
+
+  window.addEventListener('scroll', showVisibleReveals, { passive: true });
+  window.addEventListener('resize', showVisibleReveals);
 } else {
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach((entry) => {
@@ -1198,8 +1223,8 @@ if (!('IntersectionObserver' in window)) {
       }
     });
   }, {
-    threshold: 0.05,
-    rootMargin: '0px 0px -8% 0px'
+    threshold: 0.01,
+    rootMargin: '0px 0px -5% 0px'
   });
 
   revealElements.forEach((el) => {
@@ -1207,7 +1232,6 @@ if (!('IntersectionObserver' in window)) {
   });
 
   window.addEventListener('load', showVisibleReveals);
-  window.addEventListener('scroll', showVisibleReveals, { passive: true });
 }
 
     const formatTime = (time) => {
