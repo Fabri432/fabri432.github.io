@@ -618,23 +618,26 @@ body {
     .social-link {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
 
-  padding: 18px 28px; /* 🔥 bigger */
-  border-radius: 20px; /* smoother */
+  padding: 22px 36px; /* 🔥 bigger */
+  border-radius: 26px;
 
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2)); /* 🔥 nicer */
+  border: none;
 
-  color: var(--text);
-  font-weight: 850;
-  font-size: 1.1rem; /* 🔥 bigger text */
+  color: #1a1200;
+  font-weight: 900;
+  font-size: 1.2rem;
 
-  transition: 0.25s;
+  box-shadow: 0 0 30px rgba(255, 211, 77, 0.35);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
     .social-link:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 0 25px rgba(255, 211, 77, 0.35);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 211, 77, 0.6);
 }
 
     .copyright {
