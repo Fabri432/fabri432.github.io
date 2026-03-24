@@ -178,6 +178,29 @@
   gap: 24px;
   flex-wrap: wrap;
 }
+   .hero h1.reveal {
+  transition-delay: 0.05s;
+}
+
+.hero p.reveal {
+  transition-delay: 0.15s;
+}
+
+.hero-actions.reveal {
+  transition-delay: 0.25s;
+}
+
+.channel-1 {
+  transition-delay: 0.35s;
+}
+
+.channel-2 {
+  transition-delay: 0.50s;
+}
+
+.channel-3 {
+  transition-delay: 0.65s;
+} 
 
 .channels img {
   width: min(400px, 90%);
@@ -625,25 +648,27 @@
 
   <main>
     <section class="hero" id="home">
-      <div class="container hero-inner reveal show">
-        <h1>
-          I turn your ideas into
-          <span class="accent-line">high-impact videos</span>
-        </h1>
-        <p>
-          Video editor with a +4 years of experience Who focused on creating clean,dynamic,scroll-stopping content for creators,brands,
-          and channels.I adapt to your style and make sure every video feels polished,engaging and built
-          to keep attention.
-        </p>
-        <div class="hero-actions">
-          <a class="ghost-btn" href="#work">Explore My Work</a>
-          <a class="cta-btn" href="#contact">Let’s Work Together</a>
-        </div>
-        
-        <div class="channels">
-  <img src="Fabri_rblx_Sub.png">
-  <img src="Fabri_yt_Sub.png">
-  <img src="Fabri_mc_Sub.png">
+      <div class="container hero-inner reveal">
+        <h1 class="reveal">
+  I turn your ideas into
+  <span class="accent-line">high-impact videos</span>
+</h1>
+
+<p class="reveal">
+  Video editor with a +4 years of experience Who focused on creating clean,dynamic,scroll-stopping content for creators,brands,
+  and channels.I adapt to your style and make sure every video feels polished,engaging and built
+  to keep attention.
+</p>
+
+<div class="hero-actions reveal">
+  <a class="ghost-btn" href="#work">Explore My Work</a>
+  <a class="cta-btn" href="#contact">Let’s Work Together</a>
+</div>
+
+<div class="channels">
+  <img class="reveal channel-1" src="Fabri_rblx_Sub.png">
+  <img class="reveal channel-2" src="Fabri_yt_Sub.png">
+  <img class="reveal channel-3" src="Fabri_mc_Sub.png">
 </div>
       </div>
     </section>
