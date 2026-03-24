@@ -173,11 +173,11 @@ body {
       flex-wrap: wrap;
     }
 
-    .channels {
-  margin-top: 40px;
+   .channels {
+  margin-top: 42px;
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 34px;
   flex-wrap: wrap;
 }
    .hero h1.reveal {
@@ -195,26 +195,82 @@ body {
 .channel-1 {
   transition-delay: 0.35s;
 }
+    .stats-strip.reveal {
+  transition-delay: 0.8s;
+}
 
 .channel-2 {
   transition-delay: 0.50s;
+}
+    .stats-strip.reveal {
+  transition-delay: 0.8s;
 }
 
 .channel-3 {
   transition-delay: 0.65s;
 } 
-
-.channels img {
-  width: min(400px, 90%);
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: 0.3s;
-  cursor: pointer;
+    .stats-strip.reveal {
+  transition-delay: 0.8s;
 }
 
-.channels img:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 0 30px rgba(255, 211, 77, 0.4);
+.channel-card {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 0 24px rgba(255, 211, 77, 0.10);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.channel-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.channel-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 0 34px rgba(255, 211, 77, 0.35);
+}
+    .stats-strip {
+  margin-top: 34px;
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  min-width: 200px;
+  padding: 18px 24px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 0 20px rgba(255, 211, 77, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(255, 211, 77, 0.25);
+}
+
+.stat-label {
+  margin-top: 6px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text);
+  opacity: 0.9;
 }
 
     section {
@@ -696,9 +752,29 @@ body {
 </div>
 
 <div class="channels">
-  <img class="reveal channel-1" src="Fabri_rblx_Sub.png">
-  <img class="reveal channel-2" src="Fabri_yt_Sub.png">
-  <img class="reveal channel-3" src="Fabri_mc_Sub.png">
+  <div class="channel-card reveal channel-1">
+    <img src="logo-rblx.png" alt="Fabri Rblx logo">
+  </div>
+
+  <div class="channel-card reveal channel-2">
+    <img src="logo-yt.png" alt="FabriYT logo">
+  </div>
+
+  <div class="channel-card reveal channel-3">
+    <img src="logo-mc.png" alt="Fabri Minecraft logo">
+  </div>
+</div>
+
+<div class="stats-strip reveal">
+  <div class="stat-box">
+    <span class="stat-number" data-target="120" data-suffix="k+">0</span>
+    <span class="stat-label">Subscribers</span>
+  </div>
+
+  <div class="stat-box">
+    <span class="stat-number" data-target="10" data-suffix="m+">0</span>
+    <span class="stat-label">Views</span>
+  </div>
 </div>
       </div>
     </section>
@@ -1084,6 +1160,53 @@ if (!('IntersectionObserver' in window)) {
       updateMuteState();
       updateProgress();
     });
+    const animateStat = (element) => {
+  const target = Number(element.dataset.target || 0);
+  const suffix = element.dataset.suffix || '';
+  const duration = 1800;
+  const startTime = performance.now();
+
+  const step = (now) => {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = target * eased;
+
+    if (suffix === 'k+') {
+      element.textContent = `${Math.floor(current)}k+`;
+    } else if (suffix === 'm+') {
+      element.textContent = `${current.toFixed(progress < 1 ? 1 : 0)}m+`;
+    } else {
+      element.textContent = Math.floor(current);
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      element.textContent = `${target}${suffix}`;
+    }
+  };
+
+  requestAnimationFrame(step);
+};
+
+const statNumbers = document.querySelectorAll('.stat-number');
+let statsStarted = false;
+
+const startStatsIfVisible = () => {
+  if (statsStarted) return;
+
+  const statsStrip = document.querySelector('.stats-strip');
+  if (!statsStrip) return;
+
+  const rect = statsStrip.getBoundingClientRect();
+  if (rect.top < window.innerHeight * 0.95) {
+    statsStarted = true;
+    statNumbers.forEach(animateStat);
+  }
+};
+
+window.addEventListener('load', startStatsIfVisible);
+window.addEventListener('scroll', startStatsIfVisible, { passive: true });
   </script>
 </body>
 </html>
