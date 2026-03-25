@@ -475,48 +475,31 @@ body {
     }
 
      .hire-me-section {
-  padding: 100px 0 40px;
+  padding: 60px 0 10px; /* 🔥 tighter spacing */
 }
 
 .hire-me-box {
   text-align: center;
-  padding: 40px 28px;
-  border-radius: 28px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 0 30px rgba(255, 211, 77, 0.08);
-  backdrop-filter: blur(10px);
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0 auto 10px; /* 🔥 pulls buttons closer */
 }
 
-.hire-me-box h2 {
+/* ORANGE TITLE */
+.hire-title {
   font-size: clamp(2.2rem, 4vw, 3rem);
   font-weight: 900;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: var(--accent);
-  text-shadow: 0 0 20px rgba(255, 211, 77, 0.25);
+  text-shadow: 0 0 20px rgba(255, 211, 77, 0.4);
 }
 
+/* GREEN TEXT */
 .hire-sub {
-  color: var(--muted);
+  color: #a6ff9e; /* 🔥 green glow vibe */
   font-size: 1.05rem;
-  margin-bottom: 26px;
+  margin-bottom: 18px; /* 🔥 close to buttons */
   line-height: 1.6;
-}
-
-.hire-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.hire-note {
-  font-size: 0.9rem;
-  color: #8c859f;
-  opacity: 0.85;
+  text-shadow: 0 0 12px rgba(120, 255, 120, 0.25);
 }
 
     .accent-text {
@@ -1763,19 +1746,10 @@ body {
   <section class="hire-me-section">
   <div class="container hire-me-box reveal">
     
-    <h2>Hire Me</h2>
+    <h2 class="hire-title">Hire Me</h2>
     
     <p class="hire-sub">
       Ready to make your content stand out? Let’s create something amazing together.
-    </p>
-
-    <div class="hire-buttons">
-      <a href="#contact" class="cta-btn">Start a Project</a>
-      <a href="mailto:fabribusiness76@gmail.com" class="ghost-btn">Email Me</a>
-    </div>
-
-    <p class="hire-note">
-      Fast replies • Flexible pricing • High-quality edits
     </p>
 
   </div>
