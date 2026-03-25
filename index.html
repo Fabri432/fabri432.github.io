@@ -639,6 +639,34 @@ body {
       box-shadow: 0 12px 30px rgba(0,0,0,0.24);
       cursor: pointer;
     }
+    .play-center .yt-play {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.play-center .yt-play::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 22px solid white;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  margin-left: 4px;
+}
+
+.play-center .yt-play:hover {
+  transform: scale(1.08);
+  background: rgba(255, 0, 0, 1);
+}
 
     .card-body {
       padding: 18px 18px 20px;
@@ -1014,7 +1042,7 @@ body {
             <div class="video-frame landscape">
               <div class="custom-player">
                 <video src="longform1.mp4" playsinline webkit-playsinline preload="metadata"></video>
-                <div class="play-center"><span>▶</span></div>
+                <div class="play-center">   <span class="yt-play"></span> </div>
                 <div class="player-overlay">
                   <div class="progress-wrap"><input class="progress" type="range" min="0" max="100" value="0"></div>
                   <div class="player-controls">
@@ -1040,7 +1068,7 @@ body {
             <div class="video-frame landscape">
               <div class="custom-player">
                 <video src="longform2.mp4" playsinline webkit-playsinline preload="metadata"></video>
-                <div class="play-center"><span>▶</span></div>
+                <div class="play-center">   <span class="yt-play"></span> </div>
                 <div class="player-overlay">
                   <div class="progress-wrap"><input class="progress" type="range" min="0" max="100" value="0"></div>
                   <div class="player-controls">
@@ -1082,7 +1110,7 @@ body {
             <div class="video-frame portrait">
               <div class="custom-player">
                 <video src="shorts1.mp4" playsinline webkit-playsinline preload="metadata"></video>
-                <div class="play-center"><span>▶</span></div>
+                <div class="play-center">   <span class="yt-play"></span> </div>
                 <div class="player-overlay">
                   <div class="progress-wrap"><input class="progress" type="range" min="0" max="100" value="0"></div>
                   <div class="player-controls">
@@ -1108,7 +1136,7 @@ body {
             <div class="video-frame portrait">
               <div class="custom-player">
                 <video src="shorts2.mp4" playsinline webkit-playsinline preload="metadata"></video>
-                <div class="play-center"><span>▶</span></div>
+                <div class="play-center">   <span class="yt-play"></span> </div>
                 <div class="player-overlay">
                   <div class="progress-wrap"><input class="progress" type="range" min="0" max="100" value="0"></div>
                   <div class="player-controls">
@@ -1134,7 +1162,7 @@ body {
             <div class="video-frame portrait">
               <div class="custom-player">
                <video src="shorts3.mp4" playsinline webkit-playsinline preload="metadata"></video>
-                <div class="play-center"><span>▶</span></div>
+                <div class="play-center">   <span class="yt-play"></span> </div>
                 <div class="player-overlay">
                   <div class="progress-wrap"><input class="progress" type="range" min="0" max="100" value="0"></div>
                   <div class="player-controls">
@@ -1160,7 +1188,7 @@ body {
             <div class="video-frame portrait">
               <div class="custom-player">
                 <video src="shorts4.mp4" playsinline webkit-playsinline preload="metadata"></video>
-                <div class="play-center"><span>▶</span></div>
+                <div class="play-center">   <span class="yt-play"></span> </div>
                 <div class="player-overlay">
                   <div class="progress-wrap"><input class="progress" type="range" min="0" max="100" value="0"></div>
                   <div class="player-controls">
