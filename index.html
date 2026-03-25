@@ -634,6 +634,34 @@ body {
       aspect-ratio: 9 / 16;
     }
 
+    .video-frame.portrait .player-overlay {
+  padding: 10px 12px 14px;
+}
+
+.video-frame.portrait .player-controls {
+  gap: 8px;
+}
+
+.video-frame.portrait .player-btn {
+  width: 38px;
+  height: 38px;
+  font-size: 0.95rem;
+}
+
+.video-frame.portrait .player-time {
+  min-width: 64px;
+  font-size: 0.88rem;
+}
+
+.video-frame.portrait .volume {
+  width: 58px;
+  min-width: 48px;
+  flex-basis: 58px;
+}
+    .video-frame.portrait .player-overlay {
+  opacity: 1;
+}
+
     .custom-player {
       position: relative;
       width: 100%;
@@ -720,8 +748,10 @@ body {
     }
 
     .volume {
-      width: 90px;
-    }
+  width: 72px;
+  min-width: 56px;
+  flex: 0 1 72px;
+}
 
     .progress::-webkit-slider-thumb,
     .volume::-webkit-slider-thumb {
@@ -761,11 +791,23 @@ body {
 }
 
     .player-left,
-    .player-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+.player-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+    .player-left {
+  flex-wrap: nowrap;
+}
+
+.player-right {
+  margin-left: auto;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
 
     .player-btn {
       width: 42px;
@@ -789,12 +831,14 @@ body {
     }
 
     .player-time {
-      color: #fff;
-      font-size: 0.92rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      min-width: 96px;
-    }
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  min-width: 72px;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
 
     .play-center {
   position: absolute;
@@ -1349,19 +1393,39 @@ body {
     }
 
     @media (max-width: 640px) {
-      .player-controls {
-        align-items: flex-start;
-      }
+  .player-controls {
+    align-items: center;
+    gap: 8px;
+  }
 
-      .player-right {
-        width: 100%;
-        justify-content: space-between;
-      }
+  .player-left,
+  .player-right {
+    min-width: 0;
+  }
 
-      .volume {
-        width: 72px;
-      }
-    }
+  .player-right {
+    width: auto;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+
+  .player-time {
+    min-width: 60px;
+    font-size: 0.86rem;
+  }
+
+  .volume {
+    width: 54px;
+    min-width: 44px;
+    flex-basis: 54px;
+  }
+
+  .player-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 0.92rem;
+  }
+}
 
     @media (hover: none) and (pointer: coarse) {
   .player-overlay {
