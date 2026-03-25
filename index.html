@@ -1797,13 +1797,10 @@ body {
 
   <section class="hire-me-section">
   <div class="container hire-me-box reveal">
-    
-    <h2 class="hire-title">Hire Me</h2>
-    
-    <p class="hire-sub">
+    <h2 class="hire-title" data-i18n="hireTitle">Hire Me</h2>
+    <p class="hire-sub" data-i18n="hireSub">
       Ready to make your content stand out? Let’s create something amazing together.
     </p>
-
   </div>
 </section>
   
@@ -1889,6 +1886,8 @@ body {
       review1: "1 Star",
       reviewMessagePlaceholder: "Write a short review...",
       reviewSubmit: "Leave a review",
+      hireTitle: "Hire Me",
+      hireSub: "Ready to make your content stand out? Let’s create something amazing together.",
       copyright: "© 2026 FABRI. All rights reserved."
     },
     es: {
@@ -1926,57 +1925,114 @@ body {
       review1: "1 estrella",
       reviewMessagePlaceholder: "Escribe una reseña corta...",
       reviewSubmit: "Dejar una reseña",
+      hireTitle: "Contrátame",
+      hireSub: "¿Listo para hacer que tu contenido destaque? Creemos algo increíble juntos.",
       copyright: "© 2026 FABRI. Todos los derechos reservados."
     }
   };
 
-  const southAmericaTimezones = [
-    "America/Argentina/Buenos_Aires",
-    "America/Argentina/Cordoba",
-    "America/Argentina/Salta",
-    "America/Argentina/Jujuy",
-    "America/Argentina/Tucuman",
-    "America/Argentina/Catamarca",
-    "America/Argentina/La_Rioja",
-    "America/Argentina/San_Juan",
-    "America/Argentina/Mendoza",
-    "America/Argentina/San_Luis",
-    "America/Argentina/Rio_Gallegos",
-    "America/Argentina/Ushuaia",
-    "America/La_Paz",
-    "America/Sao_Paulo",
-    "America/Rio_Branco",
-    "America/Manaus",
-    "America/Belem",
-    "America/Fortaleza",
-    "America/Recife",
-    "America/Araguaina",
-    "America/Maceio",
-    "America/Bahia",
-    "America/Cuiaba",
-    "America/Campo_Grande",
-    "America/Porto_Velho",
-    "America/Boa_Vista",
-    "America/Santarem",
-    "America/Noronha",
-    "America/Santiago",
-    "America/Punta_Arenas",
-    "America/Bogota",
-    "America/Guayaquil",
-    "Pacific/Galapagos",
-    "America/Guyana",
-    "America/Asuncion",
-    "America/Lima",
-    "America/Paramaribo",
-    "America/Montevideo",
-    "America/Caracas",
-    "America/Cayenne"
-  ];
+  const spanishSpeakingRegions = new Set([
+  "AR", // Argentina
+  "BO", // Bolivia
+  "CL", // Chile
+  "CO", // Colombia
+  "CR", // Costa Rica
+  "CU", // Cuba
+  "DO", // Dominican Republic
+  "EC", // Ecuador
+  "SV", // El Salvador
+  "GQ", // Equatorial Guinea
+  "GT", // Guatemala
+  "HN", // Honduras
+  "MX", // Mexico
+  "NI", // Nicaragua
+  "PA", // Panama
+  "PY", // Paraguay
+  "PE", // Peru
+  "ES", // Spain
+  "UY", // Uruguay
+  "VE"  // Venezuela
+]);
 
-  function detectSiteLanguage() {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-    return southAmericaTimezones.includes(timezone) ? "es" : "en";
+const spanishSpeakingTimezones = new Set([
+  // Spain
+  "Europe/Madrid",
+  "Atlantic/Canary",
+
+  // Mexico
+  "America/Mexico_City",
+  "America/Cancun",
+  "America/Merida",
+  "America/Monterrey",
+  "America/Matamoros",
+  "America/Chihuahua",
+  "America/Ciudad_Juarez",
+  "America/Ojinaga",
+  "America/Mazatlan",
+  "America/Hermosillo",
+  "America/Tijuana",
+  "America/Bahia_Banderas",
+
+  // Central America
+  "America/Guatemala",  
+  "America/El_Salvador",
+  "America/Tegucigalpa",
+  "America/Managua",
+  "America/Costa_Rica",
+  "America/Panama",
+
+  // Caribbean
+  "America/Havana",
+  "America/Santo_Domingo",
+
+  // South America
+  "America/Bogota",
+  "America/Caracas",
+  "America/Lima",
+  "America/Guayaquil",
+  "America/La_Paz",
+  "America/Asuncion",
+  "America/Santiago",
+  "America/Montevideo",
+  "America/Buenos_Aires",
+  "America/Argentina/Buenos_Aires",
+  "America/Argentina/Cordoba",
+  "America/Argentina/Salta",
+  "America/Argentina/Jujuy",
+  "America/Argentina/Tucuman",
+  "America/Argentina/Catamarca",
+  "America/Argentina/La_Rioja",
+  "America/Argentina/San_Juan",
+  "America/Argentina/Mendoza",
+  "America/Argentina/San_Luis",
+  "America/Argentina/Rio_Gallegos",
+  "America/Argentina/Ushuaia",
+
+  // Equatorial Guinea
+  "Africa/Malabo"
+]);
+
+function getRegionFromLocale() {
+  const locale = navigator.language || "";
+
+  try {
+    const intlLocale = new Intl.Locale(locale);
+    return intlLocale.region || "";
+  } catch {
+    const match = locale.match(/-([A-Za-z]{2})$/);
+    return match ? match[1].toUpperCase() : "";
   }
+}
+
+function detectSiteLanguage() {
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  const region = getRegionFromLocale();
+
+  return (
+    spanishSpeakingRegions.has(region) ||
+    spanishSpeakingTimezones.has(timezone)
+  ) ? "es" : "en";
+}
 
   function applyTranslations(lang) {
     const dict = translations[lang] || translations.en;
