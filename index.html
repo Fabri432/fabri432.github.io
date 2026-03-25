@@ -681,14 +681,16 @@ body {
     }
 
     .play-center {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      z-index: 2;
-      pointer-events: auto;
-      transition: opacity 0.25s ease;
-    }
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 5; /* 🔥 IMPORTANT: ABOVE CONTROLS */
+  pointer-events: auto;
+  transition: opacity 0.25s ease;
+
+  transform: translateY(-20px); /* 🔥 moves button slightly up */
+}
 
     .custom-player.playing .play-center {
       opacity: 0;
@@ -737,6 +739,13 @@ body {
 .play-center .yt-play:hover {
   transform: scale(1.08);
   background: rgba(255, 0, 0, 1);
+}
+    .player-overlay {
+  pointer-events: none;
+}
+
+.player-overlay * {
+  pointer-events: auto;
 }
 
     .card-body {
