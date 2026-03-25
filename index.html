@@ -1580,431 +1580,443 @@ body {
     </div>
   </footer>
 
-  <script>
-    document.documentElement.classList.add('js');
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
-    const translations = {
-      en: {
-        navWork: "Work",
-        navHire: "Hire Me",
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
 
-        heroTitleTop: "I turn your ideas into",
-        heroTitleAccent: "high-impact videos",
-        heroDesc: "Video editor with 4+ years of experience. I focus on creating clean, dynamic, scroll-stopping content for creators, brands, and channels. I adapt to your style and make sure every video feels polished, engaging, and built to keep attention.",
-        heroBtnWork: "Explore My Work",
-        heroBtnContact: "Let’s Work Together",
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-        statSubscribers: "Subscribers",
-        statViews: "Views",
+  document.documentElement.classList.add('js');
 
-        longTitle: "Long-form videos",
-        longDesc1: "I edit YouTube videos and horizontal content with",
-        longAccent1: "strong rhythm",
-        longDesc2: "sharp pacing, and visuals designed to hold attention. I can also turn streams or raw recordings into polished long-form content with",
-        longAccent2: "best moments highlighted",
-        longShowcase1: "Long-form Showcase 01",
-        longShowcase2: "Long-form Showcase 02",
-
-        shortTitle: "Short-form videos",
-        shortDesc1: "I create vertical content for TikTok, Instagram Reels, and YouTube Shorts with",
-        shortAccent1: "fast hooks",
-        shortDesc2: "subtitles, dynamic motion, and edits built to stop the scroll. These are ideal for viral-style clips, talking-head videos, gaming edits, and social media growth content.",
-        shortClip1: "Short-form Clip 01",
-        shortClip2: "Short-form Clip 02",
-        shortClip3: "Short-form Clip 03",
-        shortClip4: "Short-form Clip 04",
-
-        reviewsTitle: "Client reviews",
-        reviewsDesc: "What people say about working with me.",
-        reviewNamePlaceholder: "Your name",
-        reviewRating: "Rating",
-        review5: "5 Stars",
-        review4: "4 Stars",
-        review3: "3 Stars",
-        review2: "2 Stars",
-        review1: "1 Star",
-        reviewMessagePlaceholder: "Write a short review...",
-        reviewSubmit: "Leave a review",
-        copyright: "© 2026 FABRI. All rights reserved."
-      },
-
-      es: {
-        navWork: "Trabajos",
-        navHire: "Contrátame",
-
-        heroTitleTop: "Convierto tus ideas en",
-        heroTitleAccent: "videos de alto impacto",
-        heroDesc: "Editor de video con más de 4 años de experiencia. Me enfoco en crear contenido limpio, dinámico y llamativo para creadores, marcas y canales. Me adapto a tu estilo y me aseguro de que cada video se vea pulido, atractivo y hecho para mantener la atención.",
-        heroBtnWork: "Ver mi trabajo",
-        heroBtnContact: "Trabajemos juntos",
-
-        statSubscribers: "Suscriptores",
-        statViews: "Vistas",
-
-        longTitle: "Videos largos",
-        longDesc1: "Edito videos de YouTube y contenido horizontal con",
-        longAccent1: "ritmo fuerte",
-        longDesc2: "edición dinámica y visuales diseñados para mantener la atención. También puedo convertir streams o grabaciones en contenido largo pulido con",
-        longAccent2: "los mejores momentos destacados",
-        longShowcase1: "Muestra de video largo 01",
-        longShowcase2: "Muestra de video largo 02",
-
-        shortTitle: "Videos cortos",
-        shortDesc1: "Creo contenido vertical para TikTok, Instagram Reels y YouTube Shorts con",
-        shortAccent1: "ganchos rápidos",
-        shortDesc2: "subtítulos, movimiento dinámico y ediciones hechas para detener el scroll. Son ideales para clips virales, videos hablados, edits gaming y contenido para crecer en redes sociales.",
-        shortClip1: "Clip corto 01",
-        shortClip2: "Clip corto 02",
-        shortClip3: "Clip corto 03",
-        shortClip4: "Clip corto 04",
-
-        reviewsTitle: "Reseñas de clientes",
-        reviewsDesc: "Lo que dice la gente sobre trabajar conmigo.",
-        reviewNamePlaceholder: "Tu nombre",
-        reviewRating: "Calificación",
-        review5: "5 estrellas",
-        review4: "4 estrellas",
-        review3: "3 estrellas",
-        review2: "2 estrellas",
-        review1: "1 estrella",
-        reviewMessagePlaceholder: "Escribe una reseña corta...",
-        reviewSubmit: "Dejar una reseña",
-
-        whyTitle: "¿Por qué trabajar conmigo?",
-        feature1Title: "Gran impacto visual",
-        feature1Desc: "Creo videos que se sienten vivos gracias al ritmo, al diseño de sonido y a visuales con intención.",
-        feature2Title: "Trabajo en equipo",
-        feature2Desc: "Trabajo de cerca contigo para que la edición final refleje tu estilo, tus objetivos y la sensación exacta que buscas.",
-        feature3Title: "Edición enfocada en retención",
-        feature3Desc: "Transformo material en bruto en contenido que mantiene a la audiencia mirando con una estructura más fluida y clara.",
-        feature4Title: "Múltiples formatos",
-        feature4Desc: "Desde contenido vertical para redes hasta videos horizontales para YouTube, edito según la plataforma y audiencia que necesites.",
-        feature5Title: "Movimiento limpio y acabado profesional",
-        feature5Desc: "Transiciones, texto, subtítulos y detalles de movimiento se unen para un resultado final profesional.",
-        feature6Title: "Comunicación rápida",
-        feature6Desc: "Me mantengo claro y atento durante todo el proyecto para que siempre sepas en qué estado está todo.",
-
-        copyright: "© 2026 FABRI. Todos los derechos reservados."
-      }
-    };
-
-    const southAmericaTimezones = [
-      "America/Argentina/Buenos_Aires",
-      "America/Argentina/Cordoba",
-      "America/Argentina/Salta",
-      "America/Argentina/Jujuy",
-      "America/Argentina/Tucuman",
-      "America/Argentina/Catamarca",
-      "America/Argentina/La_Rioja",
-      "America/Argentina/San_Juan",
-      "America/Argentina/Mendoza",
-      "America/Argentina/San_Luis",
-      "America/Argentina/Rio_Gallegos",
-      "America/Argentina/Ushuaia",
-      "America/La_Paz",
-      "America/Sao_Paulo",
-      "America/Rio_Branco",
-      "America/Manaus",
-      "America/Belem",
-      "America/Fortaleza",
-      "America/Recife",
-      "America/Araguaina",
-      "America/Maceio",
-      "America/Bahia",
-      "America/Cuiaba",
-      "America/Campo_Grande",
-      "America/Porto_Velho",
-      "America/Boa_Vista",
-      "America/Santarem",
-      "America/Noronha",
-      "America/Santiago",
-      "America/Punta_Arenas",
-      "America/Bogota",
-      "America/Guayaquil",
-      "Pacific/Galapagos",
-      "America/Guyana",
-      "America/Asuncion",
-      "America/Lima",
-      "America/Paramaribo",
-      "America/Montevideo",
-      "America/Caracas",
-      "America/Cayenne"
-    ];
-
-    function detectSiteLanguage() {
-      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-      const isSouthAmerica = southAmericaTimezones.includes(timezone);
-      return isSouthAmerica ? "es" : "en";
+  const translations = {
+    en: {
+      navWork: "Work",
+      navHire: "Hire Me",
+      heroTitleTop: "I turn your ideas into",
+      heroTitleAccent: "high-impact videos",
+      heroDesc: "Video editor with 4+ years of experience. I focus on creating clean, dynamic, scroll-stopping content for creators, brands, and channels. I adapt to your style and make sure every video feels polished, engaging, and built to keep attention.",
+      heroBtnWork: "Explore My Work",
+      heroBtnContact: "Let’s Work Together",
+      statSubscribers: "Subscribers",
+      statViews: "Views",
+      longTitle: "Long-form videos",
+      longDesc1: "I edit YouTube videos and horizontal content with",
+      longAccent1: "strong rhythm",
+      longDesc2: "sharp pacing, and visuals designed to hold attention. I can also turn streams or raw recordings into polished long-form content with",
+      longAccent2: "best moments highlighted",
+      longShowcase1: "Long-form Showcase 01",
+      longShowcase2: "Long-form Showcase 02",
+      shortTitle: "Short-form videos",
+      shortDesc1: "I create vertical content for TikTok, Instagram Reels, and YouTube Shorts with",
+      shortAccent1: "fast hooks",
+      shortDesc2: "subtitles, dynamic motion, and edits built to stop the scroll. These are ideal for viral-style clips, talking-head videos, gaming edits, and social media growth content.",
+      shortClip1: "Short-form Clip 01",
+      shortClip2: "Short-form Clip 02",
+      shortClip3: "Short-form Clip 03",
+      shortClip4: "Short-form Clip 04",
+      reviewsTitle: "Client reviews",
+      reviewsDesc: "What people say about working with me.",
+      reviewNamePlaceholder: "Your name",
+      review5: "5 Stars",
+      review4: "4 Stars",
+      review3: "3 Stars",
+      review2: "2 Stars",
+      review1: "1 Star",
+      reviewMessagePlaceholder: "Write a short review...",
+      reviewSubmit: "Leave a review",
+      copyright: "© 2026 FABRI. All rights reserved."
+    },
+    es: {
+      navWork: "Trabajos",
+      navHire: "Contrátame",
+      heroTitleTop: "Convierto tus ideas en",
+      heroTitleAccent: "videos de alto impacto",
+      heroDesc: "Editor de video con más de 4 años de experiencia. Me enfoco en crear contenido limpio, dinámico y llamativo para creadores, marcas y canales. Me adapto a tu estilo y me aseguro de que cada video se vea pulido, atractivo y hecho para mantener la atención.",
+      heroBtnWork: "Ver mi trabajo",
+      heroBtnContact: "Trabajemos juntos",
+      statSubscribers: "Suscriptores",
+      statViews: "Vistas",
+      longTitle: "Videos largos",
+      longDesc1: "Edito videos de YouTube y contenido horizontal con",
+      longAccent1: "ritmo fuerte",
+      longDesc2: "edición dinámica y visuales diseñados para mantener la atención. También puedo convertir streams o grabaciones en contenido largo pulido con",
+      longAccent2: "los mejores momentos destacados",
+      longShowcase1: "Muestra de video largo 01",
+      longShowcase2: "Muestra de video largo 02",
+      shortTitle: "Videos cortos",
+      shortDesc1: "Creo contenido vertical para TikTok, Instagram Reels y YouTube Shorts con",
+      shortAccent1: "ganchos rápidos",
+      shortDesc2: "subtítulos, movimiento dinámico y ediciones hechas para detener el scroll. Son ideales para clips virales, videos hablados, edits gaming y contenido para crecer en redes sociales.",
+      shortClip1: "Clip corto 01",
+      shortClip2: "Clip corto 02",
+      shortClip3: "Clip corto 03",
+      shortClip4: "Clip corto 04",
+      reviewsTitle: "Reseñas de clientes",
+      reviewsDesc: "Lo que dice la gente sobre trabajar conmigo.",
+      reviewNamePlaceholder: "Tu nombre",
+      review5: "5 estrellas",
+      review4: "4 estrellas",
+      review3: "3 estrellas",
+      review2: "2 estrellas",
+      review1: "1 estrella",
+      reviewMessagePlaceholder: "Escribe una reseña corta...",
+      reviewSubmit: "Dejar una reseña",
+      copyright: "© 2026 FABRI. Todos los derechos reservados."
     }
+  };
 
-    function applyTranslations(lang) {
-      const dict = translations[lang] || translations.en;
+  const southAmericaTimezones = [
+    "America/Argentina/Buenos_Aires",
+    "America/Argentina/Cordoba",
+    "America/Argentina/Salta",
+    "America/Argentina/Jujuy",
+    "America/Argentina/Tucuman",
+    "America/Argentina/Catamarca",
+    "America/Argentina/La_Rioja",
+    "America/Argentina/San_Juan",
+    "America/Argentina/Mendoza",
+    "America/Argentina/San_Luis",
+    "America/Argentina/Rio_Gallegos",
+    "America/Argentina/Ushuaia",
+    "America/La_Paz",
+    "America/Sao_Paulo",
+    "America/Rio_Branco",
+    "America/Manaus",
+    "America/Belem",
+    "America/Fortaleza",
+    "America/Recife",
+    "America/Araguaina",
+    "America/Maceio",
+    "America/Bahia",
+    "America/Cuiaba",
+    "America/Campo_Grande",
+    "America/Porto_Velho",
+    "America/Boa_Vista",
+    "America/Santarem",
+    "America/Noronha",
+    "America/Santiago",
+    "America/Punta_Arenas",
+    "America/Bogota",
+    "America/Guayaquil",
+    "Pacific/Galapagos",
+    "America/Guyana",
+    "America/Asuncion",
+    "America/Lima",
+    "America/Paramaribo",
+    "America/Montevideo",
+    "America/Caracas",
+    "America/Cayenne"
+  ];
 
-      document.documentElement.lang = lang;
-      document.documentElement.dataset.lang = lang;
+  function detectSiteLanguage() {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    return southAmericaTimezones.includes(timezone) ? "es" : "en";
+  }
 
-      document.querySelectorAll("[data-i18n]").forEach((el) => {
-        const key = el.dataset.i18n;
-        if (dict[key]) {
-          el.textContent = dict[key];
-        }
-      });
+  function applyTranslations(lang) {
+    const dict = translations[lang] || translations.en;
+    document.documentElement.lang = lang;
+    document.documentElement.dataset.lang = lang;
 
-      document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
-        const key = el.dataset.i18nPlaceholder;
-        if (dict[key]) {
-          el.placeholder = dict[key];
-        }
-      });
-    }
-
-    const siteLanguage = detectSiteLanguage();
-    applyTranslations(siteLanguage);
-
-    const revealElements = document.querySelectorAll('.reveal');
-
-    const showVisibleReveals = () => {
-      revealElements.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.96) {
-          el.classList.add('show');
-        }
-      });
-    };
-
-    const showAllReveals = () => {
-      revealElements.forEach((el) => el.classList.add('show'));
-    };
-
-    const isAppleDevice = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
-    const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    requestAnimationFrame(showVisibleReveals);
-    setTimeout(showVisibleReveals, 100);
-
-    if (prefersReducedMotion) {
-      showAllReveals();
-    } else if (!('IntersectionObserver' in window) || isAppleDevice || isTouchDevice) {
-      window.addEventListener('load', () => {
-        requestAnimationFrame(() => {
-          showVisibleReveals();
-          setTimeout(showVisibleReveals, 120);
-          setTimeout(showVisibleReveals, 400);
-        });
-      });
-
-      window.addEventListener('scroll', showVisibleReveals, { passive: true });
-      window.addEventListener('resize', showVisibleReveals);
-    } else {
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting || entry.intersectionRatio > 0) {
-            entry.target.classList.add('show');
-            obs.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.01,
-        rootMargin: '0px 0px -5% 0px'
-      });
-
-      revealElements.forEach((el) => {
-        if (!el.classList.contains('show')) observer.observe(el);
-      });
-
-      window.addEventListener('load', showVisibleReveals);
-    }
-
-    const formatTime = (time) => {
-      if (!isFinite(time)) return '0:00';
-      const mins = Math.floor(time / 60);
-      const secs = Math.floor(time % 60).toString().padStart(2, '0');
-      return `${mins}:${secs}`;
-    };
-
-    document.querySelectorAll('.custom-player').forEach((player) => {
-      const video = player.querySelector('video');
-      const playBtn = player.querySelector('.play-toggle');
-      const muteBtn = player.querySelector('.mute-toggle');
-      const fullscreenBtn = player.querySelector('.fullscreen-toggle');
-      const progress = player.querySelector('.progress');
-      const volume = player.querySelector('.volume');
-      const time = player.querySelector('.player-time');
-      const centerPlay = player.querySelector('.play-center');
-
-      video.muted = false;
-      video.volume = 1;
-      volume.value = 1;
-
-      const updatePlayState = () => {
-        const isPaused = video.paused;
-        player.classList.toggle('playing', !isPaused);
-        player.classList.toggle('paused', isPaused);
-        playBtn.innerHTML = isPaused ? '&#9654;' : '&#10074;&#10074;';
-      };
-
-      const updateMuteState = () => {
-        muteBtn.innerHTML = (video.muted || video.volume === 0) ? '&#128263;' : '&#128266;';
-      };
-
-      const updateProgress = () => {
-        const value = video.duration ? (video.currentTime / video.duration) * 100 : 0;
-        progress.value = value;
-        progress.style.background = `linear-gradient(to right, #ffffff 0%, #ffffff ${value}%, rgba(255,255,255,0.18) ${value}%, rgba(255,255,255,0.18) 100%)`;
-        time.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
-      };
-
-      const pauseOthers = () => {
-        document.querySelectorAll('.custom-player video').forEach((otherVideo) => {
-          if (otherVideo !== video) otherVideo.pause();
-        });
-      };
-
-      const togglePlay = async () => {
-        pauseOthers();
-        if (video.paused) {
-          try {
-            await video.play();
-          } catch (e) {}
-        } else {
-          video.pause();
-        }
-      };
-
-      playBtn.addEventListener('click', togglePlay);
-      video.addEventListener('click', togglePlay);
-      centerPlay.addEventListener('click', togglePlay);
-
-      muteBtn.addEventListener('click', () => {
-        video.muted = !video.muted;
-        updateMuteState();
-      });
-
-      volume.addEventListener('input', () => {
-        video.volume = Number(volume.value);
-        video.muted = Number(volume.value) === 0;
-        updateMuteState();
-      });
-
-      progress.addEventListener('input', () => {
-        if (video.duration) {
-          video.currentTime = (Number(progress.value) / 100) * video.duration;
-        }
-      });
-
-      fullscreenBtn.addEventListener('click', () => {
-        try {
-          if (video.webkitEnterFullscreen) {
-            video.webkitEnterFullscreen();
-            return;
-          }
-
-          if (document.fullscreenElement) {
-            document.exitFullscreen();
-          } else if (player.requestFullscreen) {
-            player.requestFullscreen();
-          }
-        } catch (e) {}
-      });
-
-      video.addEventListener('loadedmetadata', updateProgress);
-      video.addEventListener('timeupdate', updateProgress);
-      video.addEventListener('play', updatePlayState);
-      video.addEventListener('pause', updatePlayState);
-      video.addEventListener('volumechange', updateMuteState);
-      video.addEventListener('ended', updatePlayState);
-      video.addEventListener('loadeddata', updateProgress);
-
-      updatePlayState();
-      updateMuteState();
-      updateProgress();
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.dataset.i18n;
+      if (dict[key]) el.textContent = dict[key];
     });
 
-    const animateStat = (element) => {
-      const target = Number(element.dataset.target || 0);
-      const suffix = element.dataset.suffix || '';
-      const duration = 1800;
-      const startTime = performance.now();
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      const key = el.dataset.i18nPlaceholder;
+      if (dict[key]) el.placeholder = dict[key];
+    });
+  }
 
-      const step = (now) => {
-        const progress = Math.min((now - startTime) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = target * eased;
+  const siteLanguage = detectSiteLanguage();
+  applyTranslations(siteLanguage);
 
-        if (suffix === 'k+') {
-          element.textContent = `${Math.floor(current)}k+`;
-        } else if (suffix === 'm+') {
-          element.textContent = `${current.toFixed(progress < 1 ? 1 : 0)}m+`;
-        } else {
-          element.textContent = Math.floor(current);
+  const revealElements = document.querySelectorAll('.reveal');
+
+  const showVisibleReveals = () => {
+    revealElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.96) {
+        el.classList.add('show');
+      }
+    });
+  };
+
+  const showAllReveals = () => {
+    revealElements.forEach((el) => el.classList.add('show'));
+  };
+
+  const isAppleDevice = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+  const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  requestAnimationFrame(showVisibleReveals);
+  setTimeout(showVisibleReveals, 100);
+
+  if (prefersReducedMotion) {
+    showAllReveals();
+  } else if (!('IntersectionObserver' in window) || isAppleDevice || isTouchDevice) {
+    window.addEventListener('load', () => {
+      requestAnimationFrame(() => {
+        showVisibleReveals();
+        setTimeout(showVisibleReveals, 120);
+        setTimeout(showVisibleReveals, 400);
+      });
+    });
+
+    window.addEventListener('scroll', showVisibleReveals, { passive: true });
+    window.addEventListener('resize', showVisibleReveals);
+  } else {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
         }
+      });
+    }, {
+      threshold: 0.01,
+      rootMargin: '0px 0px -5% 0px'
+    });
 
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else {
-          element.textContent = `${target}${suffix}`;
-        }
-      };
+    revealElements.forEach((el) => {
+      if (!el.classList.contains('show')) observer.observe(el);
+    });
 
-      requestAnimationFrame(step);
+    window.addEventListener('load', showVisibleReveals);
+  }
+
+  const formatTime = (time) => {
+    if (!isFinite(time)) return '0:00';
+    const mins = Math.floor(time / 60);
+    const secs = Math.floor(time % 60).toString().padStart(2, '0');
+    return `${mins}:${secs}`;
+  };
+
+  document.querySelectorAll('.custom-player').forEach((player) => {
+    const video = player.querySelector('video');
+    const playBtn = player.querySelector('.play-toggle');
+    const muteBtn = player.querySelector('.mute-toggle');
+    const fullscreenBtn = player.querySelector('.fullscreen-toggle');
+    const progress = player.querySelector('.progress');
+    const volume = player.querySelector('.volume');
+    const time = player.querySelector('.player-time');
+    const centerPlay = player.querySelector('.play-center');
+
+    video.muted = false;
+    video.volume = 1;
+    volume.value = 1;
+
+    const updatePlayState = () => {
+      const isPaused = video.paused;
+      player.classList.toggle('playing', !isPaused);
+      player.classList.toggle('paused', isPaused);
+      playBtn.innerHTML = isPaused ? '&#9654;' : '&#10074;&#10074;';
     };
 
-    const statNumbers = document.querySelectorAll('.stat-number');
-    let statsStarted = false;
+    const updateMuteState = () => {
+      muteBtn.innerHTML = (video.muted || video.volume === 0) ? '&#128263;' : '&#128266;';
+    };
 
-    const startStatsIfVisible = () => {
-      if (statsStarted) return;
+    const updateProgress = () => {
+      const value = video.duration ? (video.currentTime / video.duration) * 100 : 0;
+      progress.value = value;
+      progress.style.background = `linear-gradient(to right, #ffffff 0%, #ffffff ${value}%, rgba(255,255,255,0.18) ${value}%, rgba(255,255,255,0.18) 100%)`;
+      time.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+    };
 
-      const statsStrip = document.querySelector('.stats-strip');
-      if (!statsStrip) return;
+    const pauseOthers = () => {
+      document.querySelectorAll('.custom-player video').forEach((otherVideo) => {
+        if (otherVideo !== video) otherVideo.pause();
+      });
+    };
 
-      const rect = statsStrip.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.95) {
-        statsStarted = true;
-        statNumbers.forEach(animateStat);
+    const togglePlay = async () => {
+      pauseOthers();
+      if (video.paused) {
+        try {
+          await video.play();
+        } catch (e) {}
+      } else {
+        video.pause();
       }
     };
 
-    window.addEventListener('load', startStatsIfVisible);
-    window.addEventListener('scroll', startStatsIfVisible, { passive: true });
+    playBtn.addEventListener('click', togglePlay);
+    video.addEventListener('click', togglePlay);
+    centerPlay.addEventListener('click', togglePlay);
 
-    const reviewForm = document.getElementById('reviewForm');
-    const reviewsList = document.getElementById('reviewsList');
+    muteBtn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      updateMuteState();
+    });
 
-    const renderStars = (count) => '★'.repeat(count) + '☆'.repeat(5 - count);
+    volume.addEventListener('input', () => {
+      video.volume = Number(volume.value);
+      video.muted = Number(volume.value) === 0;
+      updateMuteState();
+    });
 
-    reviewForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    progress.addEventListener('input', () => {
+      if (video.duration) {
+        video.currentTime = (Number(progress.value) / 100) * video.duration;
+      }
+    });
 
-      const name = document.getElementById('reviewName').value.trim();
-      const stars = Number(document.getElementById('reviewStars').value || 5);
-      const message = document.getElementById('reviewMessage').value.trim();
+    fullscreenBtn.addEventListener('click', () => {
+      try {
+        if (video.webkitEnterFullscreen) {
+          video.webkitEnterFullscreen();
+          return;
+        }
 
-      if (!name || !message) return;
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else if (player.requestFullscreen) {
+          player.requestFullscreen();
+        }
+      } catch (e) {}
+    });
 
-      const review = document.createElement('article');
-      review.className = 'review-card show';
+    video.addEventListener('loadedmetadata', updateProgress);
+    video.addEventListener('timeupdate', updateProgress);
+    video.addEventListener('play', updatePlayState);
+    video.addEventListener('pause', updatePlayState);
+    video.addEventListener('volumechange', updateMuteState);
+    video.addEventListener('ended', updatePlayState);
+    video.addEventListener('loadeddata', updateProgress);
 
-      review.innerHTML = `
-        <div class="review-top">
-          <strong class="review-name"></strong>
-          <span class="review-stars"></span>
-        </div>
-        <p class="review-text"></p>
-      `;
+    updatePlayState();
+    updateMuteState();
+    updateProgress();
+  });
 
-      review.querySelector('.review-name').textContent = name;
-      review.querySelector('.review-stars').textContent = renderStars(stars);
-      review.querySelector('.review-text').textContent = message;
+  const animateStat = (element) => {
+    const target = Number(element.dataset.target || 0);
+    const suffix = element.dataset.suffix || '';
+    const duration = 1800;
+    const startTime = performance.now();
 
-      reviewsList.prepend(review);
+    const step = (now) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+
+      if (suffix === 'k+') {
+        element.textContent = `${Math.floor(current)}k+`;
+      } else if (suffix === 'm+') {
+        element.textContent = `${current.toFixed(progress < 1 ? 1 : 0)}m+`;
+      } else {
+        element.textContent = Math.floor(current);
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        element.textContent = `${target}${suffix}`;
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  const statNumbers = document.querySelectorAll('.stat-number');
+  let statsStarted = false;
+
+  const startStatsIfVisible = () => {
+    if (statsStarted) return;
+
+    const statsStrip = document.querySelector('.stats-strip');
+    if (!statsStrip) return;
+
+    const rect = statsStrip.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.95) {
+      statsStarted = true;
+      statNumbers.forEach(animateStat);
+    }
+  };
+
+  window.addEventListener('load', startStatsIfVisible);
+  window.addEventListener('scroll', startStatsIfVisible, { passive: true });
+
+  const reviewForm = document.getElementById('reviewForm');
+  const reviewsList = document.getElementById('reviewsList');
+
+  const renderStars = (count) => '★'.repeat(count) + '☆'.repeat(5 - count);
+
+  function createReviewCard(data) {
+    const review = document.createElement('article');
+    review.className = 'review-card show';
+
+    review.innerHTML = `
+      <div class="review-top">
+        <strong class="review-name"></strong>
+        <span class="review-stars"></span>
+      </div>
+      <p class="review-text"></p>
+    `;
+
+    review.querySelector('.review-name').textContent = data.name;
+    review.querySelector('.review-stars').textContent = renderStars(data.stars);
+    review.querySelector('.review-text').textContent = data.message;
+
+    return review;
+  }
+
+  const reviewsQuery = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+
+  onSnapshot(reviewsQuery, (snapshot) => {
+    reviewsList.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      reviewsList.appendChild(createReviewCard(data));
+    });
+  });
+
+  reviewForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('reviewName').value.trim();
+    const stars = Number(document.getElementById('reviewStars').value || 5);
+    const message = document.getElementById('reviewMessage').value.trim();
+
+    if (!name || !message) return;
+
+    try {
+      await addDoc(collection(db, "reviews"), {
+        name,
+        stars,
+        message,
+        createdAt: serverTimestamp()
+      });
+
       reviewForm.reset();
-
       const currentLang = document.documentElement.dataset.lang || 'en';
       applyTranslations(currentLang);
-    });
-    
-  </script>
+    } catch (error) {
+      alert("Failed to send review. Check Firebase config/rules.");
+      console.error(error);
+    }
+  });
+</script>
 </body>
 </html>
