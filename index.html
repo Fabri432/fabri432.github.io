@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fabri Video Editor</title>
-  
+
+  <script>
+  document.documentElement.classList.add('js');
+  </script>
+    
   <link rel="icon" type="image/png" href="logo.png">
   <style>
     @font-face {
@@ -142,7 +146,27 @@ body {
       text-align: center;
       padding: 70px 0 30px;
     }
+ 
+    .hero h1.reveal {
+  transition-delay: 0.05s;
+}
 
+.hero p.reveal {
+  transition-delay: 0.15s;
+}
+
+.hero-actions.reveal {
+  transition-delay: 0.25s;
+}
+
+.channels.reveal {
+  transition-delay: 0.35s;
+}
+
+.stats-strip.reveal {
+  transition-delay: 0.5s;
+}
+    
     .hero-inner {
       max-width: 980px;
     }
@@ -1341,7 +1365,7 @@ body {
           <a class="cta-btn" href="#contact" data-i18n="heroBtnContact">Let’s Work Together</a>
         </div>
 
-<div class="channels">
+<div class="channels reveal">
   <a class="channel-card reveal channel-1" href="https://www.youtube.com/@fabrirblx5780" target="_blank" rel="noopener noreferrer" aria-label="Fabri Rblx YouTube channel">
     <img src="logo-rblx.png" alt="Fabri Rblx logo">
   </a>
@@ -1828,8 +1852,6 @@ body {
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-
-  document.documentElement.classList.add('js');
 
   const translations = {
     en: {
