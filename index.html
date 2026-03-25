@@ -1481,7 +1481,7 @@ body {
     </div>
   </div>
   <div class="card-body">
-    <h3>Long-form Showcase 03</h3>
+    <h3 data-i18n="longShowcase3">Long-form Showcase 03</h3>
   </div>
 </article>
 
@@ -1507,7 +1507,7 @@ body {
     </div>
   </div>
   <div class="card-body">
-    <h3>Long-form Showcase 04</h3>
+    <h3 data-i18n="longShowcase4">Long-form Showcase 04</h3>
   </div>
 </article>
 
@@ -1533,7 +1533,7 @@ body {
     </div>
   </div>
   <div class="card-body">
-    <h3>Long-form Showcase 05</h3>
+    <h3 data-i18n="longShowcase5">Long-form Showcase 05</h3>
   </div>
 </article>
           
@@ -1680,7 +1680,7 @@ body {
     </div>
   </div>
   <div class="card-body">
-    <h3>Short-form Clip 05</h3>
+    <h3 data-i18n="shortClip5">Short-form Clip 05</h3>
   </div>
 </article>
           
@@ -1691,27 +1691,27 @@ body {
 <section id="clients">
   <div class="container">
     <div class="clients-heading reveal">
-      <span class="clients-kicker">CLIENTS</span>
-      <h2>CHANNELS I'VE EDITED</h2>
+      <span class="clients-kicker" data-i18n="clientsKicker">CLIENTS</span>
+      <h2 data-i18n="clientsTitle">CHANNELS I'VE EDITED</h2>
     </div>
 
     <div class="clients-grid">
       <article class="client-card reveal">
         <img src="logo-rblx.png" alt="Smurfzin logo" class="client-avatar">
         <h3>Smurfzin</h3>
-        <p>2.13M subs</p>
+        <p data-i18n="clientSubs1">2.13M subs</p>
       </article>
 
       <article class="client-card reveal">
         <img src="logo-yt.png" alt="Delayed MC logo" class="client-avatar">
         <h3>Delayed MC</h3>
-        <p>62.4K subs</p>
+        <p data-i18n="clientSubs2">62.4K subs</p>
       </article>
 
       <article class="client-card reveal">
         <img src="logo-mc.png" alt="SONBLACKS logo" class="client-avatar">
         <h3>SONBLACKS</h3>
-        <p>236 subs</p>
+        <p data-i18n="clientSubs3">236 subs</p>
       </article>
     </div>
   </div>
@@ -1720,41 +1720,40 @@ body {
 <section id="pricing">
   <div class="container">
     <div class="section-heading reveal">
-      <h2>Pricing</h2>
+      <h2 data-i18n="pricingTitle">Pricing</h2>
       <div class="line"></div>
       <p>
-        Clear starting prices for each format. <span class="accent-text">Prices are negotiable</span> depending on complexity,
-        editing style, amount of footage, and turnaround time.
+        <span data-i18n="pricingDesc1">Clear starting prices for each format.</span>
+        <span class="accent-text" data-i18n="pricingAccent">Prices are negotiable</span>
+        <span data-i18n="pricingDesc2">depending on complexity, editing style, amount of footage, and turnaround time.</span>
       </p>
     </div>
 
     <div class="pricing-grid">
       <article class="pricing-card reveal">
-        <span class="pricing-tag">Short-form</span>
+        <span class="pricing-tag" data-i18n="pricingShortTag">Short-form</span>
         <h3>$25</h3>
-        <p class="pricing-subtext">Starting price</p>
-        <p>
-          Perfect for TikTok, Reels, YouTube Shorts, gaming clips, and fast-paced social media edits.
-        </p>
-        <div class="pricing-note">Negotiable depending on the project.</div>
+        <p class="pricing-subtext" data-i18n="pricingStartingPrice">Starting price</p>
+        <p data-i18n="pricingShortDesc">Perfect for TikTok, Reels, YouTube Shorts, gaming clips, and fast-paced social media edits.</p>
+        <div class="pricing-note" data-i18n="pricingNegotiable">Negotiable depending on the project.</div>
       </article>
 
       <article class="pricing-card reveal">
-        <span class="pricing-tag">Long-form</span>
+        <span class="pricing-tag" data-i18n="pricingLongTag">Long-form</span>
         <h3>$50</h3>
-        <p class="pricing-subtext">Starting price</p>
-        <p>
-          Great for YouTube videos, commentary, gameplay videos, streams, and polished horizontal content.
-        </p>
-        <div class="pricing-note">Negotiable depending on the project.</div>
+        <p class="pricing-subtext" data-i18n="pricingStartingPrice">Starting price</p>
+        <p data-i18n="pricingLongDesc">Great for YouTube videos, commentary, gameplay videos, streams, and polished horizontal content.</p>
+        <div class="pricing-note" data-i18n="pricingNegotiable">Negotiable depending on the project.</div>
       </article>
     </div>
 
     <div class="pricing-bottom reveal">
       <p>
-        <strong>Important:</strong> These are base prices only — <span class="accent-text">everything can be negotiated</span>
-        based on video length, style, effects, subtitles, and delivery speed.
-      </p>
+       <strong data-i18n="pricingImportant">Important:</strong>
+       <span data-i18n="pricingBottom1">These are base prices only —</span>
+       <span class="accent-text" data-i18n="pricingBottomAccent">everything can be negotiated</span>
+       <span data-i18n="pricingBottom2">based on video length, style, effects, subtitles, and delivery speed.</span>
+   </p>
     </div>
   </div>
 </section>
@@ -1868,6 +1867,9 @@ body {
       longAccent2: "best moments highlighted",
       longShowcase1: "Long-form Showcase 01",
       longShowcase2: "Long-form Showcase 02",
+      longShowcase3: "Long-form Showcase 03",
+      longShowcase4: "Long-form Showcase 04",
+      longShowcase5: "Long-form Showcase 05",
       shortTitle: "Short-form videos",
       shortDesc1: "I create vertical content for TikTok, Instagram Reels, and YouTube Shorts with",
       shortAccent1: "fast hooks",
@@ -1876,6 +1878,26 @@ body {
       shortClip2: "Short-form Clip 02",
       shortClip3: "Short-form Clip 03",
       shortClip4: "Short-form Clip 04",
+      shortClip5: "Short-form Clip 05",
+      clientsKicker: "CLIENTS",
+      clientsTitle: "CHANNELS I'VE EDITED",
+      clientSubs1: "2.13M subs",
+      clientSubs2: "62.4K subs",
+      clientSubs3: "236 subs",
+      pricingTitle: "Pricing",
+      pricingDesc1: "Clear starting prices for each format.",
+      pricingAccent: "Prices are negotiable",
+      pricingDesc2: "depending on complexity, editing style, amount of footage, and turnaround time.",
+      pricingShortTag: "Short-form",
+      pricingLongTag: "Long-form",
+      pricingStartingPrice: "Starting price",
+      pricingShortDesc: "Perfect for TikTok, Reels, YouTube Shorts, gaming clips, and fast-paced social media edits.",
+      pricingLongDesc: "Great for YouTube videos, commentary, gameplay videos, streams, and polished horizontal content.",
+      pricingNegotiable: "Negotiable depending on the project.",
+      pricingImportant: "Important:",
+      pricingBottom1: "These are base prices only —",
+      pricingBottomAccent: "everything can be negotiated",
+      pricingBottom2: "based on video length, style, effects, subtitles, and delivery speed.",
       reviewsTitle: "Client reviews",
       reviewsDesc: "What people say about working with me.",
       reviewNamePlaceholder: "Your name",
@@ -1907,6 +1929,9 @@ body {
       longAccent2: "los mejores momentos destacados",
       longShowcase1: "Muestra de video largo 01",
       longShowcase2: "Muestra de video largo 02",
+      longShowcase3: "Muestra de video largo 03",
+      longShowcase4: "Muestra de video largo 04",
+      longShowcase5: "Muestra de video largo 05",
       shortTitle: "Videos cortos",
       shortDesc1: "Creo contenido vertical para TikTok, Instagram Reels y YouTube Shorts con",
       shortAccent1: "ganchos rápidos",
@@ -1915,6 +1940,26 @@ body {
       shortClip2: "Clip corto 02",
       shortClip3: "Clip corto 03",
       shortClip4: "Clip corto 04",
+      shortClip5: "Clip corto 05",
+      clientsKicker: "CLIENTES",
+      clientsTitle: "CANALES QUE HE EDITADO",
+      clientSubs1: "2.13M suscriptores",
+      clientSubs2: "62.4K suscriptores",
+      clientSubs3: "236 suscriptores",
+      pricingTitle: "Precios",
+      pricingDesc1: "Precios iniciales claros para cada formato.",
+      pricingAccent: "Los precios son negociables",
+      pricingDesc2: "dependiendo de la complejidad, el estilo de edición, la cantidad de material y el tiempo de entrega.",
+      pricingShortTag: "Formato corto",
+      pricingLongTag: "Formato largo",
+      pricingStartingPrice: "Precio inicial",
+      pricingShortDesc: "Perfecto para TikTok, Reels, YouTube Shorts, clips gaming y ediciones rápidas para redes sociales.",
+      pricingLongDesc: "Ideal para videos de YouTube, comentarios, gameplays, streams y contenido horizontal pulido.",
+      pricingNegotiable: "Negociable según el proyecto.",
+      pricingImportant: "Importante:",
+      pricingBottom1: "Estos son solo precios base —",
+      pricingBottomAccent: "todo puede negociarse",
+      pricingBottom2: "según la duración del video, el estilo, los efectos, los subtítulos y la velocidad de entrega.",
       reviewsTitle: "Reseñas de clientes",
       reviewsDesc: "Lo que dice la gente sobre trabajar conmigo.",
       reviewNamePlaceholder: "Tu nombre",
