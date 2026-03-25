@@ -674,17 +674,19 @@ body {
     }
 
     .player-overlay {
-      position: absolute;
-      inset: auto 0 0 0;
-      padding: 18px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.08), transparent);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      z-index: 3;
-    }
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 16px 14px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.22), transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 6;
+}
 
     .custom-player:hover .player-overlay,
     .custom-player:focus-within .player-overlay,
@@ -696,10 +698,11 @@ body {
     }
 
     .progress-wrap {
-      width: 100%;
-      display: flex;
-      align-items: center;
-    }
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
 
     .progress,
     .volume {
@@ -750,18 +753,18 @@ body {
     }
 
     .player-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
 
     .player-left,
     .player-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .player-btn {
@@ -798,11 +801,10 @@ body {
   inset: 0;
   display: grid;
   place-items: center;
-  z-index: 5; /* 🔥 IMPORTANT: ABOVE CONTROLS */
+  z-index: 5;
   pointer-events: auto;
   transition: opacity 0.25s ease;
-
-  transform: translateY(-20px); /* 🔥 moves button slightly up */
+  transform: translateY(-4px);
 }
 
     .custom-player.playing .play-center {
