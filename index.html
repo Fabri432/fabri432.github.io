@@ -307,7 +307,28 @@ body {
     height: 180px;
   }
 }
-    
+    .client-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.28s ease, filter 0.28s ease;
+}
+
+.client-link:hover {
+  transform: translateY(-6px);
+}
+
+.client-link:hover .client-avatar {
+  box-shadow: 0 0 28px rgba(255, 211, 77, 0.38);
+  border-color: rgba(255, 211, 77, 0.95);
+}
+
+.client-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 8px;
+  border-radius: 24px;
+}
     .pricing-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
