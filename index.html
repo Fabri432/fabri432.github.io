@@ -252,15 +252,24 @@ body {
 }
 
 .clients-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   gap: 36px;
-  justify-items: center;
-  align-items: start;
+  flex-wrap: nowrap; /* 🔥 desktop = one line */
+}
+
+/* 📱 MOBILE FIX */
+@media (max-width: 900px) {
+  .clients-grid {
+    flex-wrap: wrap; /* mobile = stacked */
+    justify-content: center;
+  }
 }
 
 .client-card {
   text-align: center;
+  width: 220px;
 }
 
 .client-avatar {
